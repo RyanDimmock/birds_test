@@ -13,18 +13,29 @@ library(tidyverse)
 ```
 
 ## Introduction
-
-Write some text here about what you are doing. Show the code for reading in the `birds.csv` file. Explain the data and where it is from.
+Reading a csv file from the moodle page containing data about birds.
 
 ```{r code_block1}
-# add some code
+birds <- read.csv('birds.csv')
 ```
 
 ## Plotting size relationships
+```{r}
+library(ggplot2)
+ggplot(birds, aes(x = Tarsus.Length, y = Wing.Length)) +
+  geom_point()
+```
 
 Here I want you to plot the relationship between [tarsus length](https://en.wikipedia.org/wiki/Bird_measurement#Tarsus) and [wing length](https://en.wikipedia.org/wiki/Bird_measurement#Wing). Write some text explaining the plot. Show your code.
 
 Are there any outliers with a very long tarsus but very short wings? Can you identify them? Hint, you can use `filter` to do this, `pull(Species2_ebird)` will give the species name from the [eBird database](https://ebird.org/home) - but you can use any of the species names columns for this.
+
+```{r}
+library(dplyr)
+filter(birds, Tarsus.Length > 300, Wing.Length < 200) + 
+  pull(Species2_ebird)
+```
+
 
 ## Write a function
 
